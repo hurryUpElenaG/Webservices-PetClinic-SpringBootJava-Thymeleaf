@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Owner Details</title>
+
+<link rel="stylesheet" th:src="@{js/script.js}"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap"
+	rel="stylesheet">
+
+</head>
+
+<style>
+.navtext {
+	font-family: 'Merriweather', serif;
+	font-size: 18px;
+	text-align: justify;
+	/* font-weight: bold;*/
+}
+</style>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary navtext">
+		<div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarText" aria-controls="navbarText"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+		</div>
+		<div class=" container collapse navbar-collapse " id="navbarText">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" th:href="@{/}">HOME
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/owners/find}">FIND OWNERS</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/veterinarians}">VETERINARIANS</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/showError}">ERROR</a></li>
+			</ul>
+			<span class="navbar-text ml-auto navbar-dark">
+				<h1>PET CLINIC</h1>
+			</span>
+		</div>
+	</nav>
+
+
+
+	<div class="container">
+		<br>
+		<br>
+
+		<h4>Owner Information</h4>
+
+		<table class="table table-striped" th:object="${owner}">
+			<tr>
+				<th>Name</th>
+				<td><b th:text="*{firstName + ' ' + lastName}"></b></td>
+			</tr>
+			<tr>
+				<th>Address</th>
+				<td th:text="*{address}"></td>
+			</tr>
+			<tr>
+				<th>City</th>
+				<td th:text="*{city}"></td>
+			</tr>
+			<tr>
+				<th>Telephone</th>
+				<td th:text="*{phone}"></td>
+			</tr>
+		</table>
+
+		<a th:href="@{/owners/updateOwner/{id}(id=${owner.id})}"
+			class="btn btn-primary">Edit Owner</a> <a
+			th:href="@{/owners/{id}/pet/showNewPetForm(id=${owner.id})}"
+			class="btn btn-primary">Add New Pet</a> <a
+			th:href="@{/owners/deleteOwner/{id}(id=${owner.id})}"
+			class="btn btn-danger">Delete Owner</a> <br /> <br /> <br />
+		
+		
+		
+		<h4>Pets and Visits</h4>
+
+		<table class="table table-striped">
+
+			<!-- <tr th:each="pet : ${owner.pets}"> -->
+			<tr th:each="pet : ${petList}">
+			
+				<td valign="top" class="text-center">
+					<dl class="dl-horizontal">
+						<dt>Name</dt>
+						<dd th:text="${pet.name}"></dd>
+						<dt>Birth Date</dt>
+						<dd th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}"></dd>
+						<dt>Type</dt>
+						<dd th:text="${pet.type.type}"></dd>
+					</dl>
+				</td>
+
+
+
+				<td valign="top" class="float-right align-middle">
+					<table class="table ">
+						<thead>
+							<tr>
+								<th>Visit Date</th>
+								<th>Description</th>
+								<th></th>
+							</tr>
+							
+						</thead>
+						<tr th:each="visit : ${pet.visits}">
+							<td th:text="${#temporals.format(visit.visit_date, 'yyyy-MM-dd')}"></td>
+							<td th:text="${visit.description}"></td>
+							
+						</tr>
+						
+						<tr>
+							<td >
+							     <a
+								th:href="@{/owners/{id}/pet/{petId}/updatePet (id=${owner.id},petId=${pet.id})}">Edit
+									Pet
+								 </a>
+							</td>
+							<td>
+							     <a
+								th:href="@{/owners/{ownerId}/pets/{petId}/visits/showNewVisitsForm(ownerId=${owner.id},petId=${pet.id})}">Add
+									Visit</a>
+							</td>
+							<td>
+							     <a
+								th:href="@{/owners/{id}/pet/{petId}/delete(id=${owner.id},petId=${pet.id})}" class="btn btn-danger">Delete Pet</a>
+							</td>
+							
+						</tr>
+					</table>
+				</td> 
+			</tr>
+
+		</table>
+
+
+	</div>
+
+
+</body>
+</html>

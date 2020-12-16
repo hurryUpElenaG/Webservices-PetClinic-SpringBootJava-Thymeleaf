@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Veterinarian Details</title>
+
+<link rel="stylesheet" th:src="@{js/script.js}"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap"
+	rel="stylesheet">
+
+</head>
+
+<style>
+.navtext {
+	font-family: 'Merriweather', serif;
+	font-size: 18px;
+	text-align: justify;
+	/* font-weight: bold;*/
+}
+</style>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary navtext">
+		<div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarText" aria-controls="navbarText"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+		</div>
+		<div class=" container collapse navbar-collapse " id="navbarText">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" th:href="@{/}">HOME
+						<span class="sr-only">(current)</span>
+				</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/owners/find}">FIND OWNERS</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/veterinarians}">VETERINARIANS</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/showError}">ERROR</a></li>
+			</ul>
+			<span class="navbar-text ml-auto navbar-dark">
+				<h1>PET CLINIC</h1>
+			</span>
+		</div>
+	</nav>
+
+
+	<div class="container">
+		<br>
+		<h4>Veterinarian Details</h4>
+		<br>
+
+		<table class="table table-striped" >
+
+			<tr>
+				<th>First Name</th>
+				<td><b th:text="${veterinarian.firstName}">
+			</b>
+			</td>
+			</tr><tr>
+				<th>Last Name</th>
+				<td th:text="${veterinarian.lastName}"></td>
+			</tr>
+
+			<tr>
+				<th>Specialty</th>
+				<td th:text="${veterinarian.specialties.name}"></td>
+			</tr> 
+
+			<tr>
+				<td><a
+					th:href="@{/showUpdateVeterinarianForm/{id}(id=${veterinarian.id})}"
+					class="btn btn-info">Update</a> <a
+					th:href="@{/deleteVeterinarian/{id}(id=${veterinarian.id})}"
+					class="btn btn-danger">Delete</a></td>
+			</tr>
+
+
+
+
+		</table>
+
+
+		<a th:href="@{/veterinarians}">Back to veterinarians list</a>
+
+	</div>
+</body>
+</html>
