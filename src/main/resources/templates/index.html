@@ -23,6 +23,14 @@
 	text-align: justify;
 	/* font-weight: bold;*/
 }
+
+.foottext {
+	font-family: 'Merriweather', serif;
+	font-size: 14px;
+	text-align: justify;
+	/* font-weight: bold;*/
+}
+
 </style>
 <body>
 
@@ -55,11 +63,11 @@
 
 
 	<div class="container">
-		<br> <br><br>
-		<h5>Welcome to our Pet clinic</h5>
+		<br>
+		<h5>Welcome to our Pet clinic.....</h5>
 		<br>
 		<div>
-			<img src="src/main/resources/static/pets.png" th:src="@{pets.png}" />
+			<img src="src/main/resources/static/pets.png" th:src="@{pets.png}" width="400" height="400" />
 
 		</div>
 
@@ -67,4 +75,14 @@
 
 
 </body>
+
+<div>
+	<footer class="fixed-bottom">
+		<!-- Copyright -->
+		<div class="text-center bg-primary text-dark p-3 foottext">&copy;
+			2020 Petclinic</div>
+		<!-- Copyright -->
+	</footer>
+</div>
+
 </html>
